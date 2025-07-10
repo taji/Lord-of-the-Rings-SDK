@@ -9,12 +9,16 @@
   "unpkg": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "scripts": {
-    "test": "tsc --noEmit",
+    "test": "jest",
+    "test:watch": "jest --watchAll",
     "build": "tsup-node src/index.ts --format cjs,esm --dts --clean",
     "prepublishOnly": "npm run build"
   },
   "devDependencies": {
+    "@types/jest": "^30.0.0",
     "@types/node": "^24.0.12",
+    "jest": "^30.0.4",
+    "ts-jest": "^29.4.0",
     "tsup": "^6.7.0",
     "typescript": "^5.3.3"
   },

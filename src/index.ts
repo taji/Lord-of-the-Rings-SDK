@@ -1,32 +1,32 @@
 import 'dotenv/config'
 
-async function fetchMovies() {
+export async function fetchMovies(options?: { filter?: string }) {
     const apiKey = process.env.LOTR_API_KEY;
     const baseUrl = process.env.LOTR_API_BASE_URL;
 
     if (!apiKey || !baseUrl) {
-        console.error("env vars 'LOTR_API_KEY' and 'LOTR_API_BASE_URL' not defined in .env file");
-        process.exit(1); // indicate failure to CI
+        throw new Error("env vars 'LOTR_API_KEY' and 'LOTR_API_BASE_URL' not defined in .env file");
+    }
+
+    let url = `${baseUrl}/movie`;
+    if (options?.filter) {
+        url += `?${options.filter}`;
     }
 
     try {
-        const response = await fetch(`${baseUrl}/movie`, {
+        const response = await fetch(url, {
             headers: {
                 'Authorization': `Bearer ${apiKey}`
             }
         });
 
         if (!response.ok) {
-            console.error(`HTTP Error! Status: ${response.status} Message: ${response.statusText}`);
-            process.exit(1);
+            throw new Error(`HTTP Error! Status: ${response.status} Message: ${response.statusText}`);
         }
 
         const data = await response.json();
-        console.log(`Response data follows:  ${JSON.stringify(data,null, 2)}\r\n`);
+        return data;
     } catch (error) {
-        console.error(`Error fetching movies: ${error}`);
-        process.exit(1);
+        throw new Error(`Error fetching movies: ${error}`);
     }
 }
-
-fetchMovies()
