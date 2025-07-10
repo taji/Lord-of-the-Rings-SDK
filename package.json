@@ -1,0 +1,42 @@
+{
+  "name": "lotr-sdk",
+  "version": "1.0.0",
+  "description": "A TypeScript SDK for the Lord of the Rings API.",
+  "source": "./src/index.ts",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "browser": "./dist/index.js",
+  "unpkg": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "test": "tsc --noEmit",
+    "build": "tsup-node src/index.ts --format cjs,esm --dts --clean",
+    "prepublishOnly": "npm run build"
+  },
+  "devDependencies": {
+    "@types/node": "^24.0.12",
+    "tsup": "^6.7.0",
+    "typescript": "^5.3.3"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hatchways-community/lib-lab-take-home-project-sr-ca43060fa84a40c7ba89fd0f5a001140.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "exports": {
+    ".": {
+      "require": "./dist/index.js",
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "bugs": {
+    "url": "https://github.com/hatchways-community/lib-lab-take-home-project-sr-ca43060fa84a40c7ba89fd0f5a001140/issues"
+  },
+  "homepage": "https://github.com/hatchways-community/lib-lab-take-home-project-sr-ca43060fa84a40c7ba89fd0f5a001140#readme",
+  "dependencies": {
+    "dotenv": "^17.2.0"
+  }
+}
