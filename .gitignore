@@ -6,6 +6,7 @@ dist/
 build/
 
 # Compiled TypeScript files
+!jest.config.js
 *.js
 *.js.map
 *.d.ts
