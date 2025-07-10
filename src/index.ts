@@ -1,104 +1,102 @@
 import 'dotenv/config'
-import { HttpClient } from './http/client';
-import { RequestBuilder } from './http/request-builder';
-import { HttpMethod } from './http/types';
+import { HttpClient } from './core/client';
+import { RequestBuilder } from './core/request-builder';
+import { HttpMethod } from './core/types';
 
 import { Movie, MovieResponse } from './types/movie';
 import { QuoteResponse } from './types/quote';
 
-export async function fetchMovies(options?: { filter?: string }): Promise<MovieResponse> {
-    const apiKey = process.env.LOTR_API_KEY;
-    const baseUrl = process.env.LOTR_API_BASE_URL;
+export async function fetchMovies(options?: { filter?: string }, client?: HttpClient, requestBuilder?: RequestBuilder, envConfig?: { apiKey: string; baseUrl: string }): Promise<MovieResponse> {
+    const effectiveApiKey = envConfig?.apiKey || process.env.LOTR_API_KEY;
+    const effectiveBaseUrl = envConfig?.baseUrl || process.env.LOTR_API_BASE_URL;
 
-    if (!apiKey || !baseUrl) {
-        throw new Error("env vars 'LOTR_API_KEY' and 'LOTR_API_BASE_URL' not defined in .env file");
+    if (!effectiveApiKey || !effectiveBaseUrl) {
+        throw new Error("env vars 'LOTR_API_KEY' and 'LOTR_API_BASE_URL' not defined in .env file or envConfig");
     }
 
-    const client = new HttpClient(baseUrl, apiKey);
-    const requestBuilder = new RequestBuilder()
-        .setMethod(HttpMethod.GET)
-        .setPath('/movie');
+    const httpClient = client || new HttpClient(effectiveBaseUrl, effectiveApiKey);
+    const reqBuilder = requestBuilder || new RequestBuilder();
+
+    reqBuilder.setMethod(HttpMethod.GET).setPath('/movie');
 
     if (options?.filter) {
-        requestBuilder.addQueryParam(options.filter, '');
+        reqBuilder.addQueryParam(options.filter, '');
     }
 
-    const request = requestBuilder.build();
+    const request = reqBuilder.build();
 
     try {
-        const data = await client.send<MovieResponse>(request);
+        const data = await httpClient.send<MovieResponse>(request);
         return data;
     } catch (error) {
         throw new Error(`Error fetching movies: ${error}`);
     }
 }
 
-export async function fetchMovieById(id: string) : Promise<MovieResponse> {
-    const apiKey = process.env.LOTR_API_KEY;
-    const baseUrl = process.env.LOTR_API_BASE_URL;
+export async function fetchMovieById(id: string, client?: HttpClient, requestBuilder?: RequestBuilder, envConfig?: { apiKey: string; baseUrl: string }) : Promise<MovieResponse> {
+    const effectiveApiKey = envConfig?.apiKey || process.env.LOTR_API_KEY;
+    const effectiveBaseUrl = envConfig?.baseUrl || process.env.LOTR_API_BASE_URL;
 
-    if (!apiKey || !baseUrl) {
-        throw new Error("env vars 'LOTR_API_KEY' and 'LOTR_API_BASE_URL' not defind");       
+    if (!effectiveApiKey || !effectiveBaseUrl) {
+        throw new Error("env vars 'LOTR_API_KEY' and 'LOTR_API_BASE_URL' not defined in .env file or envConfig");       
     }
 
-    console.log('id', id)
+    const httpClient = client || new HttpClient(effectiveBaseUrl, effectiveApiKey);
+    const reqBuilder = requestBuilder || new RequestBuilder();
 
-    const client = new HttpClient(baseUrl, apiKey);
-    const requestBuilder = new RequestBuilder()
-        .setMethod(HttpMethod.GET)
-        .setPath(`/movie/${id}`);
+    reqBuilder.setMethod(HttpMethod.GET).setPath(`/movie/${id}`);
     
-    const request = requestBuilder.build();
+    const request = reqBuilder.build();
 
     try {
-        const data = await client.send<MovieResponse>(request);
+        const data = await httpClient.send<MovieResponse>(request);
         return data;
 
     } catch (error) {
-        throw new Error(`Error fetching movie:  ${error}`);
+        throw new Error(`Error fetching movie: ${error}`);
     }
 }
 
-export async function fetchQuotes(): Promise<QuoteResponse> {
-    const apiKey = process.env.LOTR_API_KEY;
-    const baseUrl = process.env.LOTR_API_BASE_URL;
+export async function fetchQuotes(client?: HttpClient, requestBuilder?: RequestBuilder, envConfig?: { apiKey: string; baseUrl: string }): Promise<QuoteResponse> {
+    const effectiveApiKey = envConfig?.apiKey || process.env.LOTR_API_KEY;
+    const effectiveBaseUrl = envConfig?.baseUrl || process.env.LOTR_API_BASE_URL;
 
-    if (!apiKey || !baseUrl) {
-        throw new Error("env vars 'LOTR_API_KEY' and 'LOTR_API_BASE_URL' not defined in .env file");
+    if (!effectiveApiKey || !effectiveBaseUrl) {
+        throw new Error("env vars 'LOTR_API_KEY' and 'LOTR_API_BASE_URL' not defined in .env file or envConfig");
     }
 
-    const client = new HttpClient(baseUrl, apiKey);
-    const requestBuilder = new RequestBuilder()
-        .setMethod(HttpMethod.GET)
-        .setPath('/quote');
+    const httpClient = client || new HttpClient(effectiveBaseUrl, effectiveApiKey);
+    const reqBuilder = requestBuilder || new RequestBuilder();
 
-    const request = requestBuilder.build();
+    reqBuilder.setMethod(HttpMethod.GET).setPath('/quote');
+
+    const request = reqBuilder.build();
 
     try {
-        const data = await client.send<QuoteResponse>(request);
+        const data = await httpClient.send<QuoteResponse>(request);
         return data;
     } catch (error) {
         throw new Error(`Error fetching quotes: ${error}`);
     }
 }
 
-export async function fetchQuoteById(id: string): Promise<QuoteResponse> {
-    const apiKey = process.env.LOTR_API_KEY;
-    const baseUrl = process.env.LOTR_API_BASE_URL;
+export async function fetchQuoteById(id: string, client?: HttpClient, requestBuilder?: RequestBuilder, envConfig?: { apiKey: string; baseUrl: string }): Promise<QuoteResponse> {
+    const effectiveApiKey = envConfig?.apiKey || process.env.LOTR_API_KEY;
+    const effectiveBaseUrl = envConfig?.baseUrl || process.env.LOTR_API_BASE_URL;
 
-    if (!apiKey || !baseUrl) {
-        throw new Error("env vars 'LOTR_API_KEY' and 'LOTR_API_BASE_URL' not defined in .env file");
+    if (!effectiveApiKey || !effectiveBaseUrl) {
+        throw new Error("env vars 'LOTR_API_KEY' and 'LOTR_API_BASE_URL' not defined in .env file or envConfig");
     }
 
-    const client = new HttpClient(baseUrl, apiKey);
-    const requestBuilder = new RequestBuilder()
-        .setMethod(HttpMethod.GET)
-        .setPath(`/quote/${id}`);
+    const httpClient = client || new HttpClient(effectiveBaseUrl, effectiveApiKey);
+    const reqBuilder = requestBuilder || new RequestBuilder();
 
-    const request = requestBuilder.build();
+    reqBuilder.setMethod(HttpMethod.GET).setPath(`/quote/${id}`);
+
+    const request = reqBuilder.build();
 
     try {
-        const data = await client.send<QuoteResponse>(request);
+        const data = await httpClient.send<QuoteResponse>(request);
         return data;
     } catch (error) {
         throw new Error(`Error fetching quote: ${error}`);

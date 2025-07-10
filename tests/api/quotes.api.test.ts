@@ -1,5 +1,5 @@
-import { fetchQuotes, fetchQuoteById } from '../src/index';
-import { QuoteResponse } from '../src/types/quote';
+import { fetchQuotes, fetchQuoteById } from '../../src/index';
+import { QuoteResponse } from '../../src/types/quote';
 
 describe('Quote API', () => {
   it('should fetch quotes successfully', async () => {

@@ -1,5 +1,5 @@
-import { fetchMovieById, fetchMovies } from '../src/index';
-import { Movie, MovieResponse } from '../src/types/movie';
+import { fetchMovieById, fetchMovies } from '../../src/index';
+import { Movie, MovieResponse } from '../../src/types/movie';
 
 describe('Movie API', () => {
   it('should fetch movies successfully', async () => {
