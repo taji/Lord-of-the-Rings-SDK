@@ -1,4 +1,7 @@
 import 'dotenv/config'
+import { HttpClient } from './http/client';
+import { RequestBuilder } from './http/request-builder';
+import { HttpMethod } from './http/types';
 
 export async function fetchMovies(options?: { filter?: string }) {
     const apiKey = process.env.LOTR_API_KEY;
@@ -8,23 +11,19 @@ export async function fetchMovies(options?: { filter?: string }) {
         throw new Error("env vars 'LOTR_API_KEY' and 'LOTR_API_BASE_URL' not defined in .env file");
     }
 
-    let url = `${baseUrl}/movie`;
+    const client = new HttpClient(baseUrl, apiKey);
+    const requestBuilder = new RequestBuilder()
+        .setMethod(HttpMethod.GET)
+        .setPath('/movie');
+
     if (options?.filter) {
-        url += `?${options.filter}`;
+        requestBuilder.addQueryParam(options.filter, '');
     }
 
+    const request = requestBuilder.build();
+
     try {
-        const response = await fetch(url, {
-            headers: {
-                'Authorization': `Bearer ${apiKey}`
-            }
-        });
-
-        if (!response.ok) {
-            throw new Error(`HTTP Error! Status: ${response.status} Message: ${response.statusText}`);
-        }
-
-        const data = await response.json();
+        const data = await client.send(request);
         return data;
     } catch (error) {
         throw new Error(`Error fetching movies: ${error}`);
