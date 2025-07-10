@@ -1,0 +1,31 @@
+name: CI
+'on':
+  push:
+    branches:
+      - main
+      - dev
+  pull_request:
+    branches:
+      - main
+      - dev
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Install dependencies
+        run: npm ci
+      - name: Build SDK
+        run: npm run build
+      - name: Run type checks
+        run: npm run test
+      - name: Run walking skeleton (API call verification)
+        run: node dist/index.js
+        env:
+          LOTR_API_BASE_URL: 'https://the-one-api.dev/v2'
+          LOTR_API_KEY: '6r38KyjtP2wW217EnGIi'
