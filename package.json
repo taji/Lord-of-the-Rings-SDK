@@ -10,6 +10,8 @@
   "types": "./dist/index.d.ts",
   "scripts": {
     "test": "jest",
+    "unit-test": "jest tests/unit",
+    "api-test": "jest tests/api",
     "test:watch": "jest --watchAll",
     "build": "tsup-node src/index.ts --format cjs,esm --dts --clean",
     "prepublishOnly": "npm run build"

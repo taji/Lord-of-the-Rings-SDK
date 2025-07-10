@@ -22,8 +22,10 @@ jobs:
         run: npm ci
       - name: Build SDK
         run: npm run build
-      - name: Run integration tests checks
-        run: npm run test
+      - name: Run unit tests
+        run: npm run unit-test
+      - name: Run API tests
+        run: npm run api-test
       - name: Run walking skeleton (API call verification)
         run: node dist/index.js
     env:
