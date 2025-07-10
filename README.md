@@ -80,3 +80,28 @@ To build the SDK:
 ```bash
 npm run build
 ```
+
+## Example Usage
+
+To run the example script that demonstrates the SDK's functionality:
+
+1.  **Set Environment Variables**: Ensure you have a `.env` file in the project root with your Lord of the Rings API key and base URL. 
+
+For the LOTR_API_KEY value, register with the LOTR Website [here](https://the-one-api.dev/) and they will provide the Access Token to use as your key.
+
+The format of the .env file is: 
+
+    ```
+    LOTR_API_KEY=YOUR_API_KEY_HERE
+    LOTR_API_BASE_URL=https://the-one-api.dev/v2
+    ```
+
+The `usage.ts` script reads these variables on startup.
+
+2.  **Run the Example**: Execute the following command in your terminal:
+
+    ```bash
+    npm run example
+    ```
+
+    This will execute `examples/usage.ts` and print the output to your console, showcasing various API calls.

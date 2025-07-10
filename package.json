@@ -14,7 +14,8 @@
     "api-test": "jest tests/api",
     "test:watch": "jest --watchAll",
     "build": "tsup-node src/index.ts --format cjs,esm --dts --clean",
-    "prepublishOnly": "npm run build"
+    "prepublishOnly": "npm run build",
+    "example": "ts-node examples/usage.ts"
   },
   "devDependencies": {
     "@types/jest": "^30.0.0",
