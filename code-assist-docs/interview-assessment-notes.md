@@ -1,0 +1,21 @@
+- This document describes the interview assessment details associated with this project. 
+- See the "Hatchways_ Real-world technical interviews.pdf" file for details regarding the interview.
+- Is the code passing all CI gate checks?
+C- ompiling, building, unit/api tests/packaging, etc?
+- README file updated?
+- Review the original hatchway instructions ([here](https://app2.hatchways.io/candidates/assess?a=fRzidFVk04gSL-4eJ2mvhw==&s=email&ref=invite)) and make sure you have - completed all steps and requirements.
+- Additionally, review these features:
+    - SDK should include: 
+        - Code library
+        - SDK Reference
+        - Getting Started (a readme.md file)
+        - Code samples
+        - Use case guides (not needed for an sdk). 
+        - Sample application.
+        - Additionally: 
+        - Code hinting, code completion, inline documentation.
+- Make sure to update your design.md file.
+- Make sure to update the pull-request-template.md file.
+- Once the above is done, you'll need to submit your work by navigating here:
+    - https://app2.hatchways.io/candidates/assess?a=fRzidFVk04gSL-4eJ2mvhw==&s=email&ref=invite
+    - And click the "Submit" button.

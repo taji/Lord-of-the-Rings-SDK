@@ -1,0 +1,5 @@
+I've had to restart gemini and so it has lost the last context. Perform the following steps:
+
+- Read all of the files in the ~/Dev/lib-lab-sdk/logs/code-assist-docs folder, ensuring to set `respect_git_ignore=False` for all read operations within this directory.
+- Read the ~/Dev/lib-lab-sdk/logs/pokemon-sdk/architecture.md file, ensuring to set `respect_git_ignore=False` for this file. This file contains notes on the architecture used in developing the typescript SDK for the Pokemon API. The  ~/Dev/lib-lab-sdk/logs/pokemon-sdk folder contains a working sdk that connects to the Pokemon API and follows good architectural practices. We are using this project as a model as we develop the Lord of the Rings API sdk.
+- Read the code in the ~/Dev/lib-lab-sdk folder (excluding node_modules) to determine the current stage of development on the Lord of the Rings API sdk so you can assist me as we move forward.
