@@ -39,28 +39,28 @@ To address all issues (including breaking changes), run:
 
 I chose not to resolve the issues as recommended in the output due the risk of breaking changes.  
 
-NOTE:  I had to hardcode the LOTR_LOTR_API_KEY in the ci.yml github actions configuration due to not having the required priviliges to modify the Actions settings in github.  This is obviously a security issue and I would definitely address this in a production enterprise environment. 
+NOTE:  I had to hardcode the LOTR_LOTR_API_KEY in the ci.yml github actions configuration due to not having the required priviliges to modify the Actions settings in github.  This is obviously a security issue and I would definitely address this before releasing to a production environment. 
 
-4 - Do you feel this SDK makes it easier to interact with the API?
+*4 - Do you feel this SDK makes it easier to interact with the API?*
 
 Yes, the sdk removes the additional effort required to write the http request and response logic required for the API and verify stability via testing.  It allows the developer to make a single function call to retrieve movies and/or quotes from the LOTR API.  Additionally, with a modern IDE, the proper typescript compilation and provided JSDocs provide code hinting, code completion and inline documentation.   
 
-5 - If you had more time, what else would you add?
+*5 - If you had more time, what else would you add?*
 
-a. Add the remaining API resources (book, character, chapter, etc), implement pagination, sorting, etc. 
-a. Add the remaining fine tuning logic found in the API (so pagination, sorting ).
+a. Add the remaining API resources (book, character, chapter, etc). 
+b. Add the remaining fine tuning logic found in the API (so pagination, sorting ).
 Add linting.
-b. Analyze the sdk code for any security vulnerabilities that could be used as an LOTR API exploit.
+c. Analyze the sdk code for any security vulnerabilities that could be used as an LOTR API exploit.
 
-6 - What would you change in your current SDK solution?
+*6 - What would you change in your current SDK solution?*
 
-a. Fix the permission issue for configuring LOTR_API_KEY and LOTR_API_BASE_URL environment variables in the Github Actions settings page and remove the hard coded variables in ci.yml.
+a. Fix the permission issue for configuring LOTR_API_KEY and LOTR_API_BASE_URL environment variables.
 b. I'm not happy with the string based filtering mechanism as it could expose an API security vulnerability.  I'd prefer a proper domain specific language or checked syntax approach similar to graph ql. 
 
-7 - On a scale of 1 to 10 (10 being the highest), how would you rate this solution?
+*7 - On a scale of 1 to 10 (10 being the highest), how would you rate this solution?*
 
 About 6.5.  I'd say it's not production ready.  It needs proper architecture, security and code reviews. 
 
-8 - Anything else we should keep in mind when we evaluate the project?
+*8 - Anything else we should keep in mind when we evaluate the project?*
 
 FYI (and being totally transparent):  I used Gemini CLI code assistance to guide and assist me through the coding process. I did not use any code generation tools similar to OpenAPI generator.  I've included the code-assist-docs folder with my instructions for Gemini to provide context.
