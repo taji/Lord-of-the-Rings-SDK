@@ -8,6 +8,15 @@ describe('Quote API', () => {
     expect(quotes.docs.length).toBeGreaterThan(0);
   });
 
+  it('should fetch quotes with a filter', async () => {
+    const filteredQuotes: QuoteResponse = await fetchQuotes({ filter: 'dialog=/pass/i' });
+    expect(filteredQuotes).toBeDefined();
+    expect(filteredQuotes.docs.length).toBeGreaterThan(0);
+    filteredQuotes.docs.forEach(quote => {
+      expect(quote.dialog).toMatch(/pass/i);
+    });
+  });
+
   it('should fetch a single quote by ID', async () => {
     const quoteId = '5cd96e05de30eff6ebcced57'; // Example ID for a quote
     const quote: QuoteResponse = await fetchQuoteById(quoteId);

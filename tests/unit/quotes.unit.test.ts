@@ -118,13 +118,25 @@ describe('Quote Unit Tests', () => {
   });
 
   it('should fetch all quotes using mocks', async () => {
-    const quotes: QuoteResponse = await fetchQuotes(mockHttpClientInstance, mockRequestBuilderInstance);
+    const quotes: QuoteResponse = await fetchQuotes({}, mockHttpClientInstance, mockRequestBuilderInstance);
 
     expect(mockHttpClientInstance.send).toHaveBeenCalledTimes(1);
     expect(mockRequestBuilderInstance.setMethod).toHaveBeenCalledWith(HttpMethod.GET);
     expect(mockRequestBuilderInstance.setPath).toHaveBeenCalledWith('/quote');
     expect(quotes).toBeDefined();
     expect(quotes.docs.length).toBeGreaterThan(0);
+  });
+
+  it('should fetch filtered quotes using mocks', async () => {
+    const filter = 'dialog=/pass/i';
+    const filteredQuotes: QuoteResponse = await fetchQuotes({ filter }, mockHttpClientInstance, mockRequestBuilderInstance);
+
+    expect(mockHttpClientInstance.send).toHaveBeenCalledTimes(1);
+    expect(mockRequestBuilderInstance.setMethod).toHaveBeenCalledWith(HttpMethod.GET);
+    expect(mockRequestBuilderInstance.setPath).toHaveBeenCalledWith('/quote');
+    expect(mockRequestBuilderInstance.addQueryParam).toHaveBeenCalledWith(filter, '');
+    expect(filteredQuotes).toBeDefined();
+    expect(filteredQuotes.docs.length).toBeGreaterThan(0);
   });
 
   it('should fetch a single quote by ID using mocks', async () => {
