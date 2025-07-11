@@ -6,6 +6,15 @@ import { HttpMethod } from './core/types';
 import { Movie, MovieResponse } from './types/movie';
 import { QuoteResponse } from './types/quote';
 
+/**
+ * Fetches a list of movies from The Lord of the Rings API.
+ * @param options - Optional parameters for filtering.
+ * @param options.filter - A filter string (e.g., 'rottenTomatoesScore>90').
+ * @param client - Optional HttpClient instance for dependency injection.
+ * @param requestBuilder - Optional RequestBuilder instance for dependency injection.
+ * @param envConfig - Optional environment configuration for API key and base URL.
+ * @returns A Promise that resolves to a MovieResponse object.
+ */
 export async function fetchMovies(options?: { filter?: string }, client?: HttpClient, requestBuilder?: RequestBuilder, envConfig?: { apiKey: string; baseUrl: string }): Promise<MovieResponse> {
     const effectiveApiKey = envConfig?.apiKey || process.env.LOTR_API_KEY;
     const effectiveBaseUrl = envConfig?.baseUrl || process.env.LOTR_API_BASE_URL;
@@ -33,6 +42,14 @@ export async function fetchMovies(options?: { filter?: string }, client?: HttpCl
     }
 }
 
+/**
+ * Fetches a single movie by its ID from The Lord of the Rings API.
+ * @param id - The ID of the movie to fetch.
+ * @param client - Optional HttpClient instance for dependency injection.
+ * @param requestBuilder - Optional RequestBuilder instance for dependency injection.
+ * @param envConfig - Optional environment configuration for API key and base URL.
+ * @returns A Promise that resolves to a MovieResponse object containing the single movie.
+ */
 export async function fetchMovieById(id: string, client?: HttpClient, requestBuilder?: RequestBuilder, envConfig?: { apiKey: string; baseUrl: string }) : Promise<MovieResponse> {
     const effectiveApiKey = envConfig?.apiKey || process.env.LOTR_API_KEY;
     const effectiveBaseUrl = envConfig?.baseUrl || process.env.LOTR_API_BASE_URL;
@@ -57,6 +74,13 @@ export async function fetchMovieById(id: string, client?: HttpClient, requestBui
     }
 }
 
+/**
+ * Fetches a list of quotes from The Lord of the Rings API.
+ * @param client - Optional HttpClient instance for dependency injection.
+ * @param requestBuilder - Optional RequestBuilder instance for dependency injection.
+ * @param envConfig - Optional environment configuration for API key and base URL.
+ * @returns A Promise that resolves to a QuoteResponse object.
+ */
 export async function fetchQuotes(client?: HttpClient, requestBuilder?: RequestBuilder, envConfig?: { apiKey: string; baseUrl: string }): Promise<QuoteResponse> {
     const effectiveApiKey = envConfig?.apiKey || process.env.LOTR_API_KEY;
     const effectiveBaseUrl = envConfig?.baseUrl || process.env.LOTR_API_BASE_URL;
@@ -80,6 +104,14 @@ export async function fetchQuotes(client?: HttpClient, requestBuilder?: RequestB
     }
 }
 
+/**
+ * Fetches a single quote by its ID from The Lord of the Rings API.
+ * @param id - The ID of the quote to fetch.
+ * @param client - Optional HttpClient instance for dependency injection.
+ * @param requestBuilder - Optional RequestBuilder instance for dependency injection.
+ * @param envConfig - Optional environment configuration for API key and base URL.
+ * @returns A Promise that resolves to a QuoteResponse object containing the single quote.
+ */
 export async function fetchQuoteById(id: string, client?: HttpClient, requestBuilder?: RequestBuilder, envConfig?: { apiKey: string; baseUrl: string }): Promise<QuoteResponse> {
     const effectiveApiKey = envConfig?.apiKey || process.env.LOTR_API_KEY;
     const effectiveBaseUrl = envConfig?.baseUrl || process.env.LOTR_API_BASE_URL;
