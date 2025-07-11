@@ -55,7 +55,8 @@ c. Analyze the sdk code for any security vulnerabilities that could be used as a
 *6 - What would you change in your current SDK solution?*
 
 a. Fix the permission issue for configuring LOTR_API_KEY and LOTR_API_BASE_URL environment variables.
-b. I'm not happy with the string based filtering mechanism as it could expose an API security vulnerability.  I'd prefer a proper domain specific language or checked syntax approach similar to graph ql. 
+b.  I would move the API test action to after deployment.  
+c. I'm not happy with the string based filtering mechanism as it could expose an API security vulnerability.  I'd prefer a proper domain specific language or checked syntax approach similar to graph ql. 
 
 *7 - On a scale of 1 to 10 (10 being the highest), how would you rate this solution?*
 
