@@ -27,6 +27,11 @@ export class RequestBuilder {
     return this;
   }
 
+  public setRequestBody(body: any): RequestBuilder {
+    this.request.body = body;
+    return this;
+  }
+
   public build(): Request {
     return this.request;
   }

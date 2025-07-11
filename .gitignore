@@ -35,4 +35,4 @@ coverage/
 *.tsbuildinfo
 
 # Examples folder (as requested)
-examples/
+!examples/
