@@ -1,6 +1,56 @@
 import { HttpClient } from '../../src/core/client';
 import { RequestBuilder } from '../../src/core/request-builder';
-import { HttpMethod } from '../../src/core/types';
+import { HttpMethod, Request } from '../../src/core/types';
+
+// Mock the RequestBuilder module to include setRequestBody
+jest.mock('../../src/core/request-builder', () => {
+  const { HttpMethod, Request } = jest.requireActual('../../src/core/types');
+  let mockRequest: Request; // Declare with let to allow re-assignment
+
+  const mockSetMethod = jest.fn((method: HttpMethod) => {
+    mockRequest.method = method;
+    return mockRequestBuilderInstance;
+  });
+  const mockSetPath = jest.fn((path: string) => {
+    mockRequest.path = path;
+    return mockRequestBuilderInstance;
+  });
+  const mockAddQueryParam = jest.fn((key: string, value: string) => {
+    mockRequest.queryParams[key] = value;
+    return mockRequestBuilderInstance;
+  });
+  const mockSetRequestBody = jest.fn((body: any) => {
+    mockRequest.body = body;
+    return mockRequestBuilderInstance;
+  });
+  const mockBuild = jest.fn(() => {
+    return mockRequest;
+  });
+
+  const mockRequestBuilderInstance = {
+    setMethod: mockSetMethod,
+    setPath: mockSetPath,
+    addQueryParam: mockAddQueryParam,
+    setRequestBody: mockSetRequestBody,
+    build: mockBuild,
+  };
+
+  // Reset mockRequest before each test
+  beforeEach(() => {
+    mockRequest = {
+      method: HttpMethod.GET,
+      path: '',
+      headers: {},
+      queryParams: {},
+    };
+  });
+
+  return {
+    RequestBuilder: jest.fn().mockImplementation(() => {
+      return mockRequestBuilderInstance;
+    }),
+  };
+});
 
 describe('HttpClient Unit Tests', () => {
   let httpClient: HttpClient;
@@ -15,6 +65,8 @@ describe('HttpClient Unit Tests', () => {
 
   beforeEach(() => {
     mockFetch.mockClear(); // Clear mock calls before each test
+    // Reset mock implementations for each test
+    mockFetch.mockResolvedValue(undefined); // Default to undefined to catch unhandled mocks
     httpClient = new HttpClient(baseUrl, apiKey);
   });
 
