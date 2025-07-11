@@ -68,6 +68,10 @@ describe('HttpClient Unit Tests', () => {
     // Reset mock implementations for each test
     mockFetch.mockResolvedValue(undefined); // Default to undefined to catch unhandled mocks
     httpClient = new HttpClient(baseUrl, apiKey);
+
+    // Re-create RequestBuilder mock instance for each test
+    const { RequestBuilder } = require('../../src/core/request-builder');
+    mockRequestBuilderInstance = new RequestBuilder();
   });
 
   it('should send a GET request and return JSON data', async () => {
