@@ -1,6 +1,6 @@
 # Lord of the Rings SDK
 
-A TypeScript SDK for interacting with The Lord of the Rings API.
+A TypeScript SDK for interacting with the [Lord of the Rings API](https://the-one-api.dev/)
 
 ## Installation
 
